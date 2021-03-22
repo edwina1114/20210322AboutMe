@@ -18,6 +18,7 @@ import com.example.a20210322aboutme.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding  //ActivityMainBinding表示跟隨哪個layout
+    private var myName: MyName = MyName("Edwina","linnnn")  //呼叫structure
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         //DataBinding的必要條件 (相對於 setContentView)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         //DataBinding的必要條件 (相對於 setContentView)
-
 
         binding.doneButton.setOnClickListener {
             addNickName(it)         //it 代表 button
@@ -35,12 +35,16 @@ class MainActivity : AppCompatActivity() {
             updateNickname(it)     //it 代表 當前輸入的nickname
         }
 
+        binding.myName = myName         //使用data class綁定變數
+
     }
 
     private fun addNickName(view: View)                          //view 代表 button
     {
         binding.apply {                                         //節省打很多binding
-            nicknameText.text = binding.nicknameEdit.text       //顯示輸入的內容
+            //nicknameText.text = binding.nicknameEdit.text     //way1 顯示輸入的內容
+            myName?.nickname = nicknameEdit.text.toString()      //way2
+            invalidateAll()                                     //refresh UI
             nicknameEdit.visibility = View.GONE                 //隱藏輸入欄
             doneButton.visibility = View.GONE                   //隱藏button
             nicknameText.visibility = View.VISIBLE

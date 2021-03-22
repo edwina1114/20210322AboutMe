@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!-- layout 代表要使用 databinding -->
+<!-- data 代表要使用 databinding連結資料 -->
 
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable
+            name="myName"
+            type="com.example.a20210322aboutme.MyName" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +25,7 @@
             style="@style/name_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edwina"
+            android:text="@={myName.name}"
             android:textAlignment="center" />
 
         <EditText
@@ -45,7 +52,7 @@
             style="@style/name_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:text="@={myName.nickname}"
             android:textAlignment="center"
             android:visibility="gone" />
 
